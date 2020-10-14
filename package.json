@@ -1,0 +1,25 @@
+{
+  "name": "grades-control-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alansvieceli/igti_bootcamp_m2_grades-control-api.git"
+  },
+  "author": "Alan Vieceli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alansvieceli/igti_bootcamp_m2_grades-control-api/issues"
+  },
+  "homepage": "https://github.com/alansvieceli/igti_bootcamp_m2_grades-control-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "winston": "^3.3.3"
+  },
+  "type": "module"
+}
