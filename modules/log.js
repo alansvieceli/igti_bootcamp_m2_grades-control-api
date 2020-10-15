@@ -5,8 +5,6 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
   return `${timestamp} [${label}] ${level} : ${message}`;
 });
 
-console.log('XXXXXX');
-
 export const logger = winston.createLogger({
   level: 'silly',
   transports: [
