@@ -7,7 +7,8 @@ import {
   updateGrade,
   deleteGrade,
   getGradeByStudentAndSubject,
-  getAverageSubjectAndType,
+  getAverage,
+  getBestGrades,
 } from '../modules/gradeRepository.js';
 
 const router = express.Router();
@@ -39,12 +40,14 @@ router.get('/nota', async (req, res, next) => {
 //http://localhost:3000/grades/media?subject=YY&type=XX
 router.get('/media', async (req, res, next) => {
   await doExecuteReturnData(req, res, next, () =>
-    getAverageSubjectAndType(req.query.subject, req.query.type)
+    getAverage(req.query.subject, req.query.type)
   );
 });
 
 router.get('/melhoresNotas', async (req, res, next) => {
-  res.send('data');
+  await doExecuteReturnData(req, res, next, () =>
+    getBestGrades(req.query.subject, req.query.type)
+  );
 });
 
 router.get('/:id', async (req, res, next) => {

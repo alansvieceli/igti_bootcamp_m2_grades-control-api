@@ -156,21 +156,27 @@ média é calculada somando o registro value de todos os registros que possuem o
 e type informados, e dividindo pelo total de registros que possuem este mesmo subject e
 type.
 */
-export const getAverageSubjectAndType = async (subject, type) => {
-  try {
-    if (!subject || !type) {
-      throw new Error('Os campos subject e type são obrigatórios');
-    }
+const getBySubjectAndType = async (subject, type) => {
+  if (!subject || !type) {
+    throw new Error('Os campos subject e type são obrigatórios');
+  }
 
-    const data = await getGrades();
-    const result = data.grades.filter(
-      g => g.subject === subject && g.type === type
-    );
+  const data = await getGrades();
+  const result = data.grades.filter(
+    g => g.subject === subject && g.type === type
+  );
+
+  return result;
+};
+
+export const getAverage = async (subject, type) => {
+  try {
+    const data = await getBySubjectAndType(subject, type);
 
     const media =
-      result.reduce((acc, curr) => {
+      data.reduce((acc, curr) => {
         return acc + curr.value;
-      }, 0) / result.length;
+      }, 0) / data.length;
 
     return { value: media };
   } catch (err) {
@@ -184,3 +190,23 @@ subject e type. O endpoint deve receber como parâmetro um subject e um type ret
 um array com os três registros de maior value daquele subject e type. A ordem deve ser
 do maior para o menor.
 */
+
+export const getBestGrades = async (subject, type) => {
+  try {
+    const data = await getBySubjectAndType(subject, type);
+    const arraySort = data.sort((a, b) => b.value - a.value);
+    const arrayResult = [];
+
+    for (
+      let index = 0;
+      index < (arraySort.length > 3 ? 3 : arraySort.length);
+      index++
+    ) {
+      arrayResult.push(arraySort[index]);
+    }
+
+    return arrayResult;
+  } catch (err) {
+    return { error: err.message };
+  }
+};
