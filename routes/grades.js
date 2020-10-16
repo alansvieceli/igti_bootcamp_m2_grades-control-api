@@ -44,6 +44,7 @@ router.get('/media', async (req, res, next) => {
   );
 });
 
+//http://localhost:3000/grades/melhoresNotas?subject=YY&type=XX
 router.get('/melhoresNotas', async (req, res, next) => {
   await doExecuteReturnData(req, res, next, () =>
     getBestGrades(req.query.subject, req.query.type)

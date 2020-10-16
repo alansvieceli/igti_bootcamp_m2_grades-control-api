@@ -38,6 +38,7 @@ export const insertGrade = async obj => {
     const newData = {
       id: data.nextId++, //usa e depois incrementa
       student: obj.student,
+      subject: obj.subject,
       type: obj.type,
       value: obj.value,
       timestamp: new Date(),
